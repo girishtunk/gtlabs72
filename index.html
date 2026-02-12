@@ -3,10 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f7fb" />
   <title>GTLabs72 — Software Solutions & Mobile Apps</title>
   <meta name="description" content="GTLabs72 builds clean, reliable software solutions and mobile apps. Discover Smart Notifier, an intelligent sound mode automation app." />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0b0d12" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("gtlabs72-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
 
   <meta property="og:title" content="GTLabs72 — Software Solutions & Mobile Apps" />
   <meta property="og:description" content="GTLabs72 builds clean, reliable software solutions and mobile apps. Discover Smart Notifier." />
@@ -58,7 +66,10 @@
         <a href="#smart-notifier">Smart Notifier</a>
         <a href="#support">Support</a>
       </nav>
-      <a class="cta" href="mailto:support@gtlabs72.com">Contact</a>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">Dark</button>
+        <a class="cta" href="mailto:support@gtlabs72.com">Contact</a>
+      </div>
     </div>
   </header>
 
@@ -314,5 +325,6 @@
       <p class="small">© 2026 GTLabs72. All rights reserved.</p>
     </div>
   </footer>
+  <script src="script.js" defer></script>
 </body>
 </html>
