@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gtlabs72.com/sitemap.xml
