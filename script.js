@@ -4,6 +4,10 @@
   const storageKey = "gtlabs72-theme";
   const root = document.documentElement;
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const sunIcon =
+    '<svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41"></path></svg>';
+  const moonIcon =
+    '<svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true"><path d="M20.354 15.354A9 9 0 1 1 8.646 3.646a7 7 0 0 0 11.708 11.708Z"></path></svg>';
 
   function getStoredTheme() {
     try {
@@ -36,10 +40,13 @@
 
   function updateButtons() {
     const current = getEffectiveTheme();
-    const nextLabel = current === "dark" ? "Light" : "Dark";
+    const icon = current === "dark" ? moonIcon : sunIcon;
+    const nextLabel = current === "dark" ? "light" : "dark";
     document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
-      button.textContent = nextLabel;
-      button.setAttribute("aria-label", `Switch to ${nextLabel.toLowerCase()} mode`);
+      const iconNode = button.querySelector(".theme-icon");
+      if (iconNode) iconNode.innerHTML = icon;
+      button.setAttribute("aria-label", `Switch to ${nextLabel} mode`);
+      button.setAttribute("title", `Switch to ${nextLabel} mode`);
       button.setAttribute("aria-pressed", String(current === "dark"));
     });
     updateThemeColor(current);
