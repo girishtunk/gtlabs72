@@ -448,10 +448,53 @@ p {
   font-size: 0.85rem;
 }
 
-.hero-grid > div,
-.section .card,
-.section-head {
-  animation: fade-up 0.55s ease both;
+.minimal-hero {
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.minimal-hero .container {
+  max-width: 760px;
+}
+
+.support-card {
+  max-width: 760px;
+}
+
+.bg-orb {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 999px;
+  filter: blur(55px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.32;
+}
+
+.bg-orb-a {
+  top: 70px;
+  left: -70px;
+  background: #60a5fa;
+  animation: float-a 10s ease-in-out infinite;
+}
+
+.bg-orb-b {
+  top: 220px;
+  right: -110px;
+  background: #38bdf8;
+  animation: float-b 12s ease-in-out infinite;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.js .reveal.in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @keyframes fade-up {
@@ -462,6 +505,26 @@ p {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(16px);
   }
 }
 
@@ -500,5 +563,18 @@ p {
   .footer-links {
     flex-direction: column;
     gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-orb-a,
+  .bg-orb-b {
+    animation: none;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

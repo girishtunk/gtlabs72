@@ -1,4 +1,6 @@
 (() => {
+  document.documentElement.classList.add("js");
+
   const storageKey = "gtlabs72-theme";
   const root = document.documentElement;
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -68,4 +70,25 @@
   mediaQuery.addEventListener("change", () => {
     if (!getStoredTheme()) updateButtons();
   });
+
+  const revealItems = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && revealItems.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16 }
+    );
+
+    revealItems.forEach((item, index) => {
+      item.style.transitionDelay = `${Math.min(index * 45, 220)}ms`;
+      observer.observe(item);
+    });
+  } else {
+    revealItems.forEach((item) => item.classList.add("in"));
+  }
 })();
