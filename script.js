@@ -78,6 +78,20 @@
     if (!getStoredTheme()) updateButtons();
   });
 
+  document.querySelectorAll("[data-analytics-event]").forEach((el) => {
+    el.addEventListener("click", () => {
+      if (typeof window.gtag !== "function") return;
+      const eventName = el.getAttribute("data-analytics-event");
+      const source = el.getAttribute("data-analytics-location") || "unknown";
+      const label = (el.textContent || "").trim().slice(0, 80);
+      window.gtag("event", eventName, {
+        page_path: window.location.pathname,
+        event_source: source,
+        event_label: label
+      });
+    });
+  });
+
   const revealItems = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealItems.length > 0) {
     const observer = new IntersectionObserver(
